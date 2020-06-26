@@ -24,6 +24,7 @@
                 <img src="cloud-right.svg" alt="Cloud right">
             </div>
             <div class="city-img"><img src="city.svg" alt="City image"></div>
+            <div class="success-message">Enjoy earning rewards when you pay with Liven at checkout!</div>
             <ul class="trigering-wrap">
                 <li class="d-flex trigering-item">
                     <p>I have <span class="count-dependince" id="count-dependince">0</span> dependents with me</p>
@@ -61,6 +62,29 @@
                   max: 7,
                   slide: function( event, ui ) {
                     //$( "#amount" ).val( "$" + ui.value );
+                      //console.log(max)
+                      if(ui.value == 7){
+                        $("#custom-handle").hide();
+                        $(".liven-passport-body").addClass("complete")
+                        $(".slide-to-confirm").addClass("completed").find(".button-text").text("Continue");
+                        $(".liven-passport-icon").attr('src', 'check-mark.svg');
+                        $(".lead h4").html("Easy as pie! <br> Enjoy your time at <br> Calia - Chadstone");
+                      }else{
+                          $("#custom-handle").show();
+                          $(".liven-passport-body").removeClass("complete")
+                          $(".slide-to-confirm").removeClass("completed").find(".button-text").text("Slide to confirm");
+                          $(".liven-passport-icon").attr('src', 'passport-icon.svg');
+                          $(".lead h4").html("Securely check-in to <br> Calia - Chadstone");
+                      }
+                      if(ui.value == 6){
+                        $(".slide-to-confirm").addClass("white-text");
+                      }else if(ui.value < 6){
+                          $(".slide-to-confirm").removeClass("white-text");
+                      }
+                  },
+                  change: function(event, ui ){
+                      //console.log(ui.value)
+                      //if(event)
                   }
                 });
                 //$( "#amount" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
@@ -76,7 +100,9 @@
                         n--;
                         $('#count-dependince').html(n);
                     }
-                    console.log('dicrease'+n)
+                    if(n==0){
+                        $("#dicrease").removeClass("active");
+                    }
                 });
                 
                 $("#increase").on("click", function(){
@@ -84,8 +110,17 @@
                         n++;
                         $('#count-dependince').html(n);
                     }
-                    console.log('increase'+n)
+                    if(n>0){
+                        $("#dicrease").addClass("active");
+                    }
                 });
+                
+                $("#notify").on("change", function(){
+                    if(this.checked) {
+                        var returnVal = confirm("Are you sure?");
+                        $(this).prop("checked", returnVal);
+                    }
+                })
                 
             }); //End Ready function
         })(jQuery)

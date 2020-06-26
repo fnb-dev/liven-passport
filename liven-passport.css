@@ -57,6 +57,19 @@ body {
     background: #F4F4F4;
     height: 100vh;
     overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.liven-passport-body:after{
+    content: "";
+    width: 100%;
+    height: 40%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: #ffffff;
 }
 
 .liven-passport-body a{
@@ -120,6 +133,10 @@ figure img {
     
 }
 
+.complete .lead{
+    padding-top: 137px;
+}
+
 .lead img{
     display: block;
     margin: 0 auto;
@@ -139,15 +156,43 @@ figure img {
     padding-top: 22px;
     width: 123px;
 }
+  
+.complete .liven-passport-text{
+    display: none;
+}
+
+.success-message{
+    max-width: 250px;
+    margin: 50px auto 0;
+    padding-bottom: 20px;
+    color: #9E9E9E;
+    font-size: 14px;
+    line-height: 20px;
+    display: none;
+    text-align: center;
+}
+
+.complete .success-message{
+    display: block;
+}
+
+.complete .trigering-wrap{
+    display: none;
+}
 
 .city-img{
     width: 100%;
     margin-top: 74px;
 }
 
+.complete .city-img{
+    margin-top: 54px;
+}
+
 .city-img img{
     width: 100%;
     max-width: 100%;
+    display: block;
 }
 
 .trigering-wrap{
@@ -213,6 +258,10 @@ figure img {
     transform: translateY(-50%);
 }
 
+.dicrease.active:before{
+    background-color: #FF4868;
+}
+
 .increase{
     cursor: pointer;
 }
@@ -255,6 +304,7 @@ figure img {
     -webkit-transition: .4s;
     transition: .4s;
     display: inline-block;
+    vertical-align: middle;
 }
 
 .switch .slider:after{
@@ -311,6 +361,17 @@ figure img {
     background: #FF0867;
 }
 
+.slide-to-confirm.completed:after{
+    background: #FF0867;
+}
+
+
+.slide-to-confirm.white-text .button-text,
+.slide-to-confirm.completed .button-text{
+    color: #ffffff;
+    mix-blend-mode: unset;
+}
+
 .slide-to-confirm .button-text {
     position: absolute;
     left: 50%;
@@ -365,6 +426,7 @@ figure img {
     background: linear-gradient(0deg, #FF0867, #FF0867), #FF3D51;
     border: 0;
     z-index: 5;
+    outline: none;
 }
 
 .ui-slider-horizontal .ui-slider-handle:before,
@@ -408,9 +470,117 @@ figure img {
     border-color: #FF0867;
 }
 /* =============== Responsive style =============== */
-/* iPhone 6 and upper style */
+/* iPhone 6 pluse and upper style */
 @media only screen and (max-height: 736px) {
+    .lead{
+        padding-top: 80px;
+    }
+    
+    .complete .lead {
+        padding-top: 105px;
+    }
+    
+    .lead h4{
+        margin-top: 20px;
+    }
+    
+    .cloud.right{
+        top: 265px;
+    }
+    
+    .complete .city-img,
+    .city-img{
+        margin-top: 50px;
+    }
+    
+    .cloud.left{
+        top: 90px;
+    }
+    
+    .city-img img{
+        max-height: 180px;
+        object-fit: cover;
+        object-position: top;
+    }
 
+}
+
+/* iPhone 6 */
+@media only screen and (max-height: 667px) {
+    .lead{
+        padding-top: 84px;
+        font-size: 18px;
+        line-height: 24px;
+    }
+    
+    .complete .lead {
+        padding-top: 100px;
+    }
+    
+    .liven-passport-text{
+        padding-top: 15px;
+    }
+    
+    .complete .liven-passport-text{
+        padding-top: 28px;
+    }
+    
+    .lead h4{
+        margin-top: 20px;
+    }
+    
+    .cloud.left {
+        top: 92px;
+    }
+    
+    .cloud.right{
+        top: 255px;
+    }
+    
+    .complete .city-img,
+    .city-img{
+        margin-top: 50px;
+    }
+    
+    .trigering-wrap{
+        margin-top: 12px;
+    }
+    
+    .trigering-item{
+        font-size: 13px;
+    }
+    
+    .trigering-item{
+        padding: 6px 13px 6px 40px;
+        min-height: 36px;
+    }
+    
+    .city-img img{
+        max-height: 150px;
+    }
+    
+    #slider-range, 
+    .ui-widget.ui-widget-content,
+    .ui-widget.ui-widget-content,
+    .slide-to-confirm:after, 
+    .slide-to-confirm:before{
+        height: 45px;
+    }
+    
+    .ui-slider-horizontal .ui-slider-handle{
+        width: 45px;
+        height: 45px;
+    }
+    
+    .slide-to-confirm:after, 
+    .slide-to-confirm:before{
+        width: 28px;
+    }
+    
+    .success-message{
+        margin-top: 40px;
+        padding-bottom: 10px;
+    }
 
 }
 
@@ -435,12 +605,20 @@ figure img {
         line-height: 23px;
     }
     
+    .complete .lead {
+        padding-top: 75px;
+    }
+    
     .cloud.left{
         top: 65px;
     }
     
     .liven-passport-text{
         padding-top: 10px;
+    }
+    
+    .complete .liven-passport-text{
+        padding-top: 23px;
     }
     
     .lead h4{
@@ -451,6 +629,7 @@ figure img {
         top: 195px;
     }
     
+    .complete .city-img,
     .city-img{
         margin-top: 40px;
     }
@@ -506,7 +685,7 @@ figure img {
     .ui-slider-horizontal .ui-slider-handle{
         width: 35px;
         height: 35px;
-        margin-left: -17.5px;
+        margin-left: -19px;
     }
     
     .ui-slider-horizontal .ui-slider-handle:before{
@@ -528,13 +707,18 @@ figure img {
     
     .slide-to-confirm:after, 
     .slide-to-confirm:before{
-        width: 17.5px;
+        width: 18px;
     }
 
     .city-img img{
         max-height: 135px;
         object-fit: cover;
         object-position: top;
+    }
+    
+    .success-message{
+        margin-top: 30px;
+        padding-bottom: 10px;
     }
 
 }
