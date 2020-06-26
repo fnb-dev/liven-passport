@@ -4,16 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>Liven</title>
-    <link rel="stylesheet" href="main.css">
+    <title>Liven passport</title>
     <link rel="stylesheet" href="jquery-ui.min.css">
+    <link rel="stylesheet" href="liven-passport.css">
 </head>
 
 <body>
-    <div class="main">
-        <div class="liven-passport-body">
-            <a href="app.liven.com.au/faq">FAQ</a>
-            <div class="cloud left-top">
+    <div class="liven-passport-body">
+            <a href="app.liven.com.au/faq" class="faq-link">FAQ</a>
+            <div class="cloud left">
                 <img src="cloud-left.svg" alt="Cloud left">
             </div>
             <div class="lead">
@@ -21,36 +20,82 @@
                 <img src="Liven-Passport-text.svg" alt="Liven passport text" class="liven-passport-text">
                 <h4>Securely check-in to <br> Calia - Chadstone</h4>
             </div>
-            <div class="cloud left-top">
+            <div class="cloud right">
                 <img src="cloud-right.svg" alt="Cloud right">
             </div>
             <div class="city-img"><img src="city.svg" alt="City image"></div>
-            <ul class="trigering-item">
+            <ul class="trigering-wrap">
                 <li class="d-flex trigering-item">
-                    <p>I have .count-dependince <span class="0"></span> dependents with me</p>
+                    <p>I have <span class="count-dependince" id="count-dependince">0</span> dependents with me</p>
                     <div class="dependents-triger">
-                        <div class="dicrease"></div>
-                        <div class="increase"></div>
+                        <div class="dicrease" id="dicrease"></div>
+                        <div class="increase" id="increase"></div>
                     </div>
                 </li>
                 <li class="d-flex trigering-item">
                     <p>Notify me about exclusive Calia offers</p>
                     <div class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider round"></span>
+                        <input type="checkbox" name="notify" id="notify" checked>
+                        <label for="notify" class="slider round"></label>
                     </div>
                 </li>
             </ul>
-            <div class="slider">
+            <div class="slide-to-confirm">
                 <div class="button-text">Slide to confirm</div>
+                <div id="slider-range"><div id="custom-handle" class="ui-slider-handle"></div></div>
+            </div>
+            <div class="note-text">
+                I declare my details with Liven are correct &amp; <br> I am not currently suffering flu-like symptoms.
             </div>
         </div>
-    </div>
     <script src="jquery-3.5.1.min.js"></script>
     <script src="jquery-ui.min.js"></script>
-    <script src="main.js"></script>
+    <script src="jquery.touchSwipe.js"></script>
     <script>
-        var player;
+        (function($){
+            $(function(){
+                /*$( "#slider-range" ).slider({
+                  range: "min",
+                  value: 0,
+                  min: 1,
+                  max: 7,
+                  slide: function( event, ui ) {
+                    //$( "#amount" ).val( "$" + ui.value );
+                  }
+                });*/
+                //$( "#amount" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
+                
+                
+
+                var n = 0;
+                
+                console.log(n)
+                
+                $("#dicrease").on("click", function(){
+                    if(n>0){
+                        n--;
+                        $('#count-dependince').html(n);
+                    }
+                    console.log('dicrease'+n)
+                });
+                
+                $("#increase").on("click", function(){
+                    if(n>=0){
+                        n++;
+                        $('#count-dependince').html(n);
+                    }
+                    console.log('increase'+n)
+                });
+                
+                $("#custom-handle").swipe( {
+                    //Generic swipe handler for all directions
+                    swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+                      $(this).text("You swiped " + direction );  
+                    }
+                  });
+                
+            }); //End Ready function
+        })(jQuery)
         
     </script>
 </body>
