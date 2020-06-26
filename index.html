@@ -50,11 +50,11 @@
         </div>
     <script src="jquery-3.5.1.min.js"></script>
     <script src="jquery-ui.min.js"></script>
-    <script src="jquery.touchSwipe.js"></script>
+    <script type="text/javascript" src="jquery.ui.touch-punch.min.js"></script>
     <script>
         (function($){
             $(function(){
-                /*$( "#slider-range" ).slider({
+                $( "#slider-range" ).slider({
                   range: "min",
                   value: 0,
                   min: 1,
@@ -62,7 +62,7 @@
                   slide: function( event, ui ) {
                     //$( "#amount" ).val( "$" + ui.value );
                   }
-                });*/
+                });
                 //$( "#amount" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
                 
                 
@@ -86,13 +86,6 @@
                     }
                     console.log('increase'+n)
                 });
-                
-                $("#custom-handle").swipe( {
-                    //Generic swipe handler for all directions
-                    swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-                      $(this).text("You swiped " + direction );  
-                    }
-                  });
                 
             }); //End Ready function
         })(jQuery)
