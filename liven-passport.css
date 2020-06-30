@@ -153,7 +153,7 @@ figure img {
 }
 
 .complete .lead{
-    padding-top: 100px;
+    padding-top: 89px;
 }
 
 .lead img{
@@ -167,9 +167,13 @@ figure img {
     font-weight: normal;
 }
 
+.complete .lead h4{
+    margin-top: 26px;
+}
+
 .lead h4 span{
     display: block;
-    padding-bottom: 27px;
+    padding-bottom: 26px;
 }
 
 .liven-passport-icon{
@@ -493,10 +497,45 @@ figure img {
 .ui-slider-horizontal .ui-slider-handle.ui-state-active:after{
     border-color: #FF0867;
 }
+
+.icon-wrap{
+    position: relative;
+    width: 64px;
+    margin: 0 auto;
+    clear: both;
+}
+
+#svgContainer{
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 9;
+    background-color: #F4F4F4;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.show .liven-passport-icon{
+    opacity: 0;
+    visibility: hidden;
+}
+
+.show #svgContainer{
+    opacity: 1;
+    visibility: visible;
+}
+
 /* =============== Responsive style =============== */
 /* iPhone 6 pluse and upper style */
 @media only screen and (max-height: 736px) {
-    .lead{
+    .lead,
+    .complete .lead{
         padding-top: 72px;
     }
     
@@ -504,16 +543,13 @@ figure img {
         width: 40px;
     }
     
-    .complete .lead {
-        padding-top: 83px;
-    }
-    
+    .complete .lead h4,
     .lead h4{
         margin-top: 17px;
     }
     
     .lead h4 span{
-        padding-bottom: 12px;
+        padding-bottom: 7px;
     }
     
     .cloud.right{
@@ -547,14 +583,19 @@ figure img {
 
 /* iPhone 6 */
 @media only screen and (max-height: 667px) {
+    .complete .lead,
     .lead{
         padding-top: 84px;
         font-size: 18px;
         line-height: 24px;
     }
+        
+    .complete .lead h4{
+        margin-top: 10px;
+    }
     
-    .complete .lead {
-        padding-top: 90px;
+    .lead h4 span {
+        padding-bottom: 12px;
     }
     
     .liven-passport-text{
@@ -628,6 +669,11 @@ figure img {
     .liven-passport-body:after{
         height: 36%;
     }
+    
+    #svgContainer {
+        max-width: 45px;
+        max-height: 45px;
+    }
 }
 
 /* iPhone 5 style */
@@ -645,14 +691,11 @@ figure img {
         width: 110px;
     }
 
+    .complete .lead,
     .lead{
         padding-top: 62px;
         font-size: 17px;
         line-height: 23px;
-    }
-    
-    .complete .lead {
-        padding-top: 68px;
     }
     
     .cloud.left{
@@ -671,8 +714,16 @@ figure img {
         margin-top: 10px;
     }
     
+    .complete .lead h4{
+        margin-top: 0px;
+    }
+    
     .lead h4 span {
         padding-bottom: 5px;
+    }
+    
+    .complete .lead h4 span {
+        padding-bottom: 7px;
     }
     
     .cloud.right{
@@ -776,6 +827,11 @@ figure img {
     
     .liven-passport-body:after{
         height: 38%;
+    }
+    
+    #svgContainer{
+        width: auto;
+        height: auto;
     }
 
 }
