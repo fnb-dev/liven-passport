@@ -83,14 +83,19 @@
                           //$(".liven-passport-icon").attr('src', 'passport-icon.svg');
                           $(".lead h4").html("Securely check-in to <br> Calia - Chadstone");
                       }
+                      if(ui.value == 3){
+                        $(".slide-to-confirm").addClass("white-text");
+                      }else if(ui.value < 3){
+                          $(".slide-to-confirm").removeClass("white-text");
+                      }
                       if(ui.value == 4){
                         $(".icon-wrap").addClass("show");
                         lottie.play();
-                        $(".slide-to-confirm").addClass("white-text");
+                        //$(".slide-to-confirm").addClass("white-text");
                       }else if(ui.value < 4){
                           lottie.stop()
                           $(".icon-wrap").removeClass("show");
-                          $(".slide-to-confirm").removeClass("white-text");
+                          //$(".slide-to-confirm").removeClass("white-text");
                       }
                   },
                   change: function(event, ui ){
