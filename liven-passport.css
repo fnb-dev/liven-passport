@@ -390,7 +390,7 @@ figure img {
     margin-left: 32px;
     position: relative;
     margin-top: 16px;
-    background: rgba(24, 24, 24, 0.04);
+    background: #FF0867;
     border-radius: 100px;
     border: 0;
     outline: none;
@@ -405,7 +405,7 @@ figure img {
     position: absolute;
 }
 
-
+/*
 .slide-to-confirm:before{
     content: "";
     position: absolute;
@@ -424,7 +424,7 @@ figure img {
 
 .slide-to-confirm.completed:before{
     width: 100%;
-}
+}*/
 
 .slideTriger{
     position: absolute;
@@ -505,7 +505,7 @@ figure img {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     z-index: 2;
-    color: #FF0867;
+    color: #ffffff;
     font-size: 18px;
     transition: color .3s ease-in;
     width: 100%;
