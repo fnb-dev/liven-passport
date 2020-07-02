@@ -174,8 +174,22 @@
                   autoplay: false,
                   animType: 'svg',
                   loop: false,
-                  path: 'liven-loader.json'
+                  path: 'liven-loader.json',
+                  rendererSettings: {
+                      onComplete: function(){
+                          console.log("Worked")
+                      }
+                  }
                 });
+                
+                animItem.onComplete = function() {
+                  console.log('complete')
+                    
+                    $('body').removeClass("checking");
+                    $(".lead h4").html("<span>Easy as pie! </span> Enjoy your time at <br> Calia - Chadstone");
+                    $(".liven-passport-body").addClass("complete")
+                    $(".slide-to-confirm").addClass("completed").find(".button-text").text("Continue");
+                }
                 
                 $(".slide-to-confirm").on("click", function(e){
                     e.preventDefault();
