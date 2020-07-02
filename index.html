@@ -20,6 +20,7 @@
                     <img src="passport-icon.svg" alt="Liven passport icon" class="liven-passport-icon">
                     <div id="svgContainer"></div>
                 </div>
+                <div class="checking-text">Securely checking you in...</div>
                 <img src="Liven-Passport-text.svg" alt="Liven passport text" class="liven-passport-text">
                 <h4>Securely check-in to <br> Calia - Chadstone</h4>
             </div>
@@ -44,12 +45,13 @@
                     </div>
                 </li>
             </ul>
-            <div class="slide-to-confirm">
-                <div class="button-text">Slide to confirm</div>
-                <div id="slider-range">
+            <button class="slide-to-confirm">
+                <span class="button-text">Slide to confirm</span>
+                <span class="slideTriger"></span>
+                <!--<div id="slider-range">
                     <div id="custom-handle" class="ui-slider-handle"></div>
-                </div>
-            </div>
+                </div>-->
+            </button>
             <div class="note-text">
                 I declare my details with Liven are correct &amp; <br> I am not currently suffering flu-like symptoms.
             </div>
@@ -60,8 +62,41 @@
     <script src="lottie.js"></script>
     <script>
         (function($){
-            $(function(){
-                $( "#slider-range" ).slider({
+            $(function(){ 
+                
+                
+                
+
+                var n = 0;
+                                
+                $("#dicrease").on("click", function(){
+                    if(n>0){
+                        n--;
+                        $('#count-dependince').html(n);
+                    }
+                    if(n==0){
+                        $("#dicrease").removeClass("active");
+                    }
+                });
+                
+                $("#increase").on("click", function(){
+                    if(n>=0){
+                        n++;
+                        $('#count-dependince').html(n);
+                    }
+                    if(n>0){
+                        $("#dicrease").addClass("active");
+                    }
+                });
+                
+                $("#notify").on("change", function(){
+                    if(this.checked) {
+                        // var returnVal = confirm("Are you sure?");
+                        // $(this).prop("checked", returnVal);
+                    }
+                });
+                
+                /*$( "#slider-range" ).slider({
                   range: "min",
                   value: 0,
                   min: 1,
@@ -130,38 +165,7 @@
                       }
                       //console.log(ui.value)
                   }
-                });
-                
-                
-
-                var n = 0;
-                                
-                $("#dicrease").on("click", function(){
-                    if(n>0){
-                        n--;
-                        $('#count-dependince').html(n);
-                    }
-                    if(n==0){
-                        $("#dicrease").removeClass("active");
-                    }
-                });
-                
-                $("#increase").on("click", function(){
-                    if(n>=0){
-                        n++;
-                        $('#count-dependince').html(n);
-                    }
-                    if(n>0){
-                        $("#dicrease").addClass("active");
-                    }
-                });
-                
-                $("#notify").on("change", function(){
-                    if(this.checked) {
-                        // var returnVal = confirm("Are you sure?");
-                        // $(this).prop("checked", returnVal);
-                    }
-                });
+                });*/
                 
                 var svgContainer = document.getElementById('svgContainer');
                 var animItem = bodymovin.loadAnimation({
@@ -173,13 +177,30 @@
                   path: 'liven-loader.json'
                 });
                 
-               /* lottie.loadAnimation({
-                  container: element, // the dom element that will contain the animation
-                  renderer: 'svg',
-                  loop: true,
-                  autoplay: true,
-                  path: 'data.json' // the path to the animation json
-                });*/
+                $(".slide-to-confirm").on("click", function(e){
+                    e.preventDefault();
+                    $('body').addClass("checking");
+                    $(this).addClass("sliding").find(".button-text").text("Confirmed "+ n +" persons");
+                    
+                    $(".icon-wrap").addClass("show");
+                    lottie.play();
+                    setTimeout(function(){
+                        $(".slide-to-confirm").removeClass("sliding");
+                        $(".slide-to-confirm").addClass("completed");
+                        $(".slideTriger").fadeOut(500);
+                    }, 600);
+                    
+                    var btnWidth = $(this).outerWidth();
+                    var sTrigerWidth = $(".slideTriger").outerWidth();
+                    var moVelength = btnWidth - sTrigerWidth;
+                    
+                    $(".slideTriger").delay(600).animate({
+                        //left: moVelength,
+                    }, 500, function(){
+                    });
+                })
+                
+                
                 
             }); //End Ready function
         })(jQuery)

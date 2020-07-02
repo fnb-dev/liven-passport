@@ -149,7 +149,7 @@ figure img {
     line-height: 26px;
     color: #000000;
     font-family: 'sf_pro_displaysemibold';
-    
+    position: relative;
 }
 
 .complete .lead{
@@ -161,10 +161,29 @@ figure img {
     margin: 0 auto;
 }
 
+.checking-text{
+    position: absolute; 
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+    opacity: 0;
+    transition: opacity .3s;
+}
+
 .lead h4{
     max-width: 235px;
     margin: 32px auto 0;
     font-weight: normal;
+}
+
+.checking .lead h4,
+.checking .liven-passport-text{
+    opacity: 0;
+}
+
+.checking .checking-text{
+    opacity: 1;
 }
 
 .complete .lead h4{
@@ -365,10 +384,27 @@ figure img {
 }
 
 .slide-to-confirm{
-    padding: 0 60px;
+    width: calc(100% - 64px);
+    height: 56px;
+    margin-left: 32px;
     position: relative;
     margin-top: 16px;
+    background: rgba(24, 24, 24, 0.04);
+    border-radius: 100px;
+    border: 0;
+    outline: none;
 }
+
+.slide-to-confirm:active,
+.slide-to-confirm:focus{
+    outline: none;
+}
+
+.slideTriger{
+    position: absolute;
+}
+
+/*
 .slide-to-confirm:after,
 .slide-to-confirm:before{
     content: "";
@@ -380,23 +416,97 @@ figure img {
     border-radius: 0 100px 100px 0;
     background: rgba(24, 24, 24, 0.04);
 }
+*/
 
 .slide-to-confirm:before{
-    right: auto;
-    left: 32px;
-    border-radius: 100px 0 0 100px;
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 56px;
+    top: 0;
+    height: 56px;
+    border-radius: 100px;
+    background: #FF0867;
+    transition: width 0.6s cubic-bezier(0.5, 1, 0.89, 1);
+}
+
+.slide-to-confirm.sliding:before{
+    width: 100%;
+}
+
+.slide-to-confirm.completed:before{
+    width: 100%;
+}
+
+.slideTriger{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(0deg, #FF0867, #FF0867), #FF3D51;
+    border: 0;
+    z-index: 5;
+    outline: none;
+    transition: left 0.6s cubic-bezier(0.5, 1, 0.89, 1);
+}
+
+.slide-to-confirm.sliding .slideTriger,
+.slide-to-confirm.completed .slideTriger{
+    left: calc(100% - 56px);
+    background: #ffffff;
+}
+
+.slideTriger:before,
+.slideTriger:after{
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.slideTriger:before{
+    width: 15px;
+    height: 3px;
+    background-color: #ffffff;
+}
+
+.slideTriger:after{
+    width: 8px;
+    height: 8px;
+    border-right: 3px solid #ffffff;
+    border-top: 3px solid #ffffff;
+    margin-left: 3px;
+    -webkit-transform: translate(-50%, -50%) rotate(45deg);
+    -ms-transform: translate(-50%, -50%) rotate(45deg);
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.slide-to-confirm.sliding .slideTriger:before,
+.slide-to-confirm.completed .slideTriger:before{
     background: #FF0867;
 }
 
-.slide-to-confirm.completed:after{
-    background: #FF0867;
+.slide-to-confirm.sliding .slideTriger:after,
+.slide-to-confirm.completed .slideTriger:after{
+    border-color: #FF0867;
 }
 
+.slideTriger.active{
+    outline: none;
+    background: #ffffff;
+}
 
-.slide-to-confirm.white-text .button-text,
-.slide-to-confirm.completed .button-text{
-    color: #ffffff;
-    mix-blend-mode: unset;
+.slideTriger.active:before{
+    background-color: #FF0867;
+}
+
+.slideTriger.active:after{
+    border-color: #FF0867;
 }
 
 .slide-to-confirm .button-text {
@@ -408,9 +518,14 @@ figure img {
     transform: translate(-50%, -50%);
     z-index: 2;
     color: #FF0867;
-    /*color: cyan;
-    mix-blend-mode: difference;*/
     font-size: 18px;
+    transition: color .3s ease-in;
+    width: 100%;
+}
+
+.slide-to-confirm.sliding .button-text,
+.slide-to-confirm.completed .button-text{
+    color: #ffffff;
 }
 
 .note-text{
@@ -421,82 +536,6 @@ figure img {
     margin: 20px auto 0;
     clear: both;
     text-align: center;
-    
-}
-
-#slider-range{
-    width: 100%;
-}
-
-#slider-range,
-.ui-widget.ui-widget-content{
-    height: 56px;
-    border-radius: 0;
-    background: rgba(24, 24, 24, 0.04);
-    border: 0px;
-}
-
-.ui-widget-header{
-    border: 0;
-    background: #FF0867;
-    border-radius: 0;
-}
-
-#custom-handle{
-    position: relative;
-}
-
-.ui-slider-horizontal .ui-slider-handle{
-    top: 0;
-    margin-left: -28px;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: linear-gradient(0deg, #FF0867, #FF0867), #FF3D51;
-    border: 0;
-    z-index: 5;
-    outline: none;
-}
-
-.ui-slider-horizontal .ui-slider-handle:before,
-.ui-slider-horizontal .ui-slider-handle:after{
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
-
-.ui-slider-horizontal .ui-slider-handle:before{
-    width: 15px;
-    height: 3px;
-    background-color: #ffffff;
-}
-
-.ui-slider-horizontal .ui-slider-handle:after{
-    width: 8px;
-    height: 8px;
-    border-right: 3px solid #ffffff;
-    border-top: 3px solid #ffffff;
-    margin-left: 3px;
-    -webkit-transform: translate(-50%, -50%) rotate(45deg);
-    -ms-transform: translate(-50%, -50%) rotate(45deg);
-    transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.ui-slider-horizontal .ui-slider-handle.ui-state-active{
-    outline: none;
-    background: #ffffff;
-}
-
-.ui-slider-horizontal .ui-slider-handle.ui-state-active:before{
-    background-color: #FF0867;
-}
-
-.ui-slider-horizontal .ui-slider-handle.ui-state-active:after{
-    border-color: #FF0867;
 }
 
 .icon-wrap{
@@ -652,7 +691,7 @@ figure img {
         height: 45px;
     }
     
-    .ui-slider-horizontal .ui-slider-handle{
+    .slideTriger{
         width: 45px;
         height: 45px;
     }
@@ -787,18 +826,18 @@ figure img {
         height: 35px;
     }
     
-    .ui-slider-horizontal .ui-slider-handle{
+    .slideTriger{
         width: 35px;
         height: 35px;
         margin-left: -19px;
     }
     
-    .ui-slider-horizontal .ui-slider-handle:before{
+    .slideTriger:before{
         width: 12px;
         height: 2px;
     }
     
-    .ui-slider-horizontal .ui-slider-handle:after{
+    .slideTriger:after{
         width: 6px;
         height: 6px;
         border-right: 2px solid #ffffff;
