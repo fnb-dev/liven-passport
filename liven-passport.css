@@ -219,13 +219,14 @@ figure img {
     text-align: center;
 }
 
+/*
 .complete .success-message{
     display: block;
 }
 
 .complete .trigering-wrap{
     display: none;
-}
+}*/
 
 .city-img{
     width: 100%;

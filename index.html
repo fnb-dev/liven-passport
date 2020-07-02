@@ -105,7 +105,9 @@
                 
                 animItem.onComplete = function() {
                   console.log('complete')
-                    
+                    $(".trigering-wrap").fadeOut(function(){
+                        $(".success-message").show();
+                    });
                     $('body').removeClass("checking");
                     $(".lead h4").html("<span>Easy as pie! </span> Enjoy your time at <br> Calia - Chadstone");
                     $(".liven-passport-body").addClass("complete")
