@@ -44,25 +44,36 @@
                     </div>
                 </li>
             </ul>
-            <button class="slide-to-confirm">
+            <div class="slidebutton-wrap">
                 <span class="button-text">Check-in</span>
-                <!--<span class="slideTriger"></span>-->
-            </button>
+                <div class="slidershell" id="slidershell">
+                    <input class="slider" id="slider" type="range" min="0" max="100" value="0"
+    oninput="showValue(value);" onchange="showValue(value);"/>
+                    <div class="sliderfill" id="sliderfill"></div>
+                    <div class="sliderthumb" id="sliderthumb"></div>
+                </div>
+
+            </div>
             <div class="note-text">
                 I declare my details with Liven are correct &amp; <br> I am not currently suffering flu-like symptoms.
             </div>
         </div>
     <script src="jquery-3.5.1.min.js"></script>
+    <script src="TweenMax.min.js"></script>
     <script src="lottie.js"></script>
     <script>
+        
+        var n = 0;
+        var d = 1;
+        
         (function($){
             $(function(){ 
 
-                var n = 0;
                                 
                 $("#dicrease").on("click", function(){
                     if(n>0){
                         n--;
+                        d--;
                         $('#count-dependince').html(n);
                     }
                     if(n==0){
@@ -73,6 +84,7 @@
                 $("#increase").on("click", function(){
                     if(n>=0){
                         n++;
+                        d++;
                         $('#count-dependince').html(n);
                     }
                     if(n>0){
@@ -96,51 +108,226 @@
                   animType: 'svg',
                   loop: false,
                   path: 'https://assets1.lottiefiles.com/packages/lf20_PLwdt1.json',
-                  rendererSettings: {
-                      onComplete: function(){
-                          console.log("Worked")
-                      }
-                  }
                 });
                 
                 animItem.onComplete = function() {
-                  console.log('complete')
                     $(".trigering-wrap").fadeOut(function(){
                         $(".success-message").show();
                     });
+                    $(".slidebutton-wrap").prepend('<a href="appboy://close" class="continue-action">Close</a>');
                     $('body').removeClass("checking");
                     $(".lead h4").html("<span>Easy as pie! </span> Enjoy your time at <br> Calia - Chadstone");
-                    $(".liven-passport-body").addClass("complete")
-                    $(".slide-to-confirm").addClass("completed").find(".button-text").text("Continue");
+                    $(".liven-passport-body").addClass("complete");
+                    $(".slidebutton-wrap").addClass("completed").find(".button-text").text("Continue");
                 }
-                
-                $(".slide-to-confirm").on("click", function(e){
-                    e.preventDefault();
-                    $('body').addClass("checking");
-                    $(this).addClass("sliding").find(".button-text").text("Confirmed "+ n +" persons");
-                    
-                    $(".icon-wrap").addClass("show");
-                    lottie.play();
-                    setTimeout(function(){
-                        $(".slide-to-confirm").removeClass("sliding");
-                        $(".slide-to-confirm").addClass("completed");
-                        $(".slideTriger").fadeOut(500);
-                    }, 600);
-                    
-                    var btnWidth = $(this).outerWidth();
-                    var sTrigerWidth = $(".slideTriger").outerWidth();
-                    var moVelength = btnWidth - sTrigerWidth;
-                    
-                    $(".slideTriger").delay(600).animate({
-                        //left: moVelength,
-                    }, 500, function(){
-                    });
-                })
-                
+                              
                 
             }); //End Ready function
         })(jQuery)
         
+        
+        var slider = document.getElementById("slider"),
+            maxValue = 100,
+            speed = 5,
+            currValue, rafID;
+        
+            slider.min = 0;
+            slider.max = maxValue;
+        
+            /* setup variables for the elements of our slider */
+            var slideWrap = document.getElementsByClassName("slidebutton-wrap")[0];
+            var thumb = document.getElementById("sliderthumb");
+            var shell = document.getElementById("slidershell");
+            var fill = document.getElementById("sliderfill"); /* the percentage slider value */
+            var thumbsize = 35; /* must match the thumb size in your css */
+            var bigval = slideWrap.offsetWidth; //250; /* widest or tallest value depending on orientation */
+            var smallval = 0; /* narrowest or shortest value depending on orientation */
+   console.log(bigval)
+        function showValue(val) {
+            
+            var pc = val/(slider.max - slider.min);
+            var tracksize = bigval - thumbsize;
+            var loc = pc * tracksize;
+            slider.min = 0;
+            slider.max = maxValue;
+
+            //document.getElementById("blur").setAttribute("stdDeviation", val/10);
+            thumb.style.top =   "0px";
+            thumb.style.left =  loc + "px";
+            fill.style.left =  "0px";
+            fill.style.width =  loc + thumbsize + "px"; 
+        }
+        
+        /* we often need a function to set the slider values on page load */
+        function setValue(val) {
+            document.getElementById("slider").value = val;
+            showValue(val);
+        }
+
+        setValue(0);
+            // listen for unlock
+            function unlockStartHandler() {
+                // clear raf if trying again
+                window.cancelAnimationFrame(rafID);
+
+                // set to desired value
+                currValue = +this.value;
+            }
+
+            function unlockEndHandler() {
+
+                // store current value
+                currValue = +this.value;
+
+                // determine if we have reached success or not
+                if(currValue >= 90 || currValue >= maxValue) {
+                    successHandler();
+                }
+                
+                // determine if we have reached success or not
+                if (currValue < 5) {
+                    jQuery(".sliderthumb").removeClass("active");
+                }
+                
+                if(currValue <= 90 ) {
+                    TweenMax.to(thumb, 0.3, {
+                        css: {
+                            left: 0
+                        },
+                        ease: Sine.easeOut
+                    });
+                    TweenMax.to(fill, 0.3, {
+                        css: {
+                            width: 35+'px'
+                        },
+                        ease: Sine.easeOut
+                    });
+                    currValue = 0;
+                    slider.value = 0
+                    
+                    jQuery('body').removeClass("checking");
+                    jQuery(".slidebutton-wrap").removeClass("sliding").find(".button-text").text("Check-in");
+
+                    jQuery(".icon-wrap").removeClass("show");
+                    lottie.stop();
+                }
+                
+                if(currValue > 90 ) {
+                    
+                    var pc = 0/(slider.max - slider.min);
+                    var tracksize = bigval - thumbsize;
+                    var loc = pc * tracksize;
+                    
+                    currValue = maxValue;
+                    slider.value = maxValue
+                    
+                    TweenMax.to(thumb, 0.5, {
+                        css: {
+                            left: tracksize + "px"
+                        },
+                        ease: Sine.easeOut
+                    });
+                    TweenMax.to(fill, 0.5, {
+                        css: {
+                            width: bigval
+                        },
+                        ease: Sine.easeOut
+                    });
+                    
+                    jQuery('body').addClass("checking");
+                    jQuery(".slidebutton-wrap").addClass("sliding").find(".button-text").text("Confirmed "+ d +" persons");
+
+                    jQuery(".icon-wrap").addClass("show");
+                    lottie.play();
+                    setTimeout(function(){
+                        jQuery(".slidebutton-wrap").removeClass("sliding");
+                        jQuery(".slidebutton-wrap").addClass("completed");
+                        jQuery(".sliderthumb").fadeOut(500);
+                    }, 600);
+                }
+                else {
+                    rafID = window.requestAnimationFrame(animateHandler);
+                }
+            }
+
+            // handle range animation
+            function animateHandler() {
+
+                // calculate gradient transition
+                var transX = currValue - maxValue;
+
+                // update input range
+                slider.value = currValue;
+
+                if (currValue < 5) {
+                    jQuery(".sliderthumb").removeClass("active");
+                }
+                
+                //Change slide thumb color on mouse up
+                
+                if (this.value > 50) {
+                    slideWrap.classList.add('sliding');
+                }
+                
+                if (this.value < 50) {
+                    slideWrap.classList.remove('sliding');
+                    
+                    slider.value = 0;
+                }
+
+                // determine if we need to continue
+                if(currValue > -1) {
+                  window.requestAnimationFrame(animateHandler);   
+                }
+
+                // decrement value
+                currValue = currValue - speed;
+            }
+
+            // handle successful unlock
+            function successHandler(){
+              //alert('Unlocked');
+                jQuery('body').addClass("checking");
+                jQuery(".slidebutton-wrap").addClass("sliding").find(".button-text").text("Confirmed "+ d +" persons");
+
+                jQuery(".icon-wrap").addClass("show");
+                lottie.play();
+                setTimeout(function(){
+                    jQuery(".slidebutton-wrap").removeClass("sliding");
+                    jQuery(".slidebutton-wrap").addClass("completed");
+                    jQuery(".sliderthumb").fadeOut(500);
+                }, 600);
+
+            };
+
+            // bind events
+            slider.addEventListener('mousedown', unlockStartHandler, false);
+            slider.addEventListener('mousestart', unlockStartHandler, false);
+            slider.addEventListener('mouseup', unlockEndHandler, false);
+            slider.addEventListener('touchend', unlockEndHandler, false);
+        
+        // move gradient
+        slider.addEventListener('input', function() {
+            //Change slide thumb color on way up
+            if (this.value > 5) {
+                jQuery(".sliderthumb").addClass("active");
+            }
+            //Change slide thumb color on way up
+            if (this.value > 20) {
+                slideWrap.classList.add('ltpurple');
+            }
+            if (this.value > 40) {
+                slideWrap.classList.add('sliding');
+            }
+            
+            if (this.value < 5) {
+                jQuery(".sliderthumb").removeClass("active");
+            }
+            
+            if (this.value < 50) {
+                slideWrap.classList.remove('sliding');
+            }
+        });
     </script>
 </body>
 </html>

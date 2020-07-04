@@ -125,6 +125,8 @@ figure img {
     font-size: 17px;
     color: #FF3C6E;
     font-family: 'sf_pro_displaysemibold';
+    position: relative;
+    z-index: 99;
 }
 
 .cloud{
@@ -166,8 +168,10 @@ figure img {
     left: 0;
     width: 100%;
     text-align: center;
-    margin-top: 15px;
+    margin-top: 25px;
     opacity: 0;
+    -webkit-transition: opacity .3s;
+    -ms-transition: opacity .3s;
     transition: opacity .3s;
 }
 
@@ -175,7 +179,11 @@ figure img {
     max-width: 235px;
     margin: 32px auto 0;
     font-weight: normal;
+    -webkit-transition: opacity .8s;
+    -ms-transition: opacity .8s;
+    transition: opacity .8s;
 }
+
 
 .checking .lead h4,
 .checking .liven-passport-text{
@@ -219,14 +227,6 @@ figure img {
     text-align: center;
 }
 
-/*
-.complete .success-message{
-    display: block;
-}
-
-.complete .trigering-wrap{
-    display: none;
-}*/
 
 .city-img{
     width: 100%;
@@ -384,20 +384,20 @@ figure img {
     left: 13px;
 }
 
-.slide-to-confirm{
-    width: calc(100% - 64px);
+.slidebutton-wrap{
+    width: calc(100% - 62px);
     height: 56px;
     margin-left: 32px;
     position: relative;
     margin-top: 16px;
-    background: #FF0867;
+    /*background: #FF0867;*/
     border-radius: 100px;
     border: 0;
     outline: none;
 }
 
-.slide-to-confirm:active,
-.slide-to-confirm:focus{
+.slidebutton-wrap:active,
+.slidebutton-wrap:focus{
     outline: none;
 }
 
@@ -405,31 +405,8 @@ figure img {
     position: absolute;
 }
 
-/*
-.slide-to-confirm:before{
-    content: "";
-    position: absolute;
-    left: 0;
-    width: 56px;
-    top: 0;
-    height: 56px;
-    border-radius: 100px;
-    background: #FF0867;
-    transition: width 0.6s cubic-bezier(0.5, 1, 0.89, 1);
-}
 
-.slide-to-confirm.sliding:before{
-    width: 100%;
-}
-
-.slide-to-confirm.completed:before{
-    width: 100%;
-}*/
-
-.slideTriger{
-    position: absolute;
-    top: 0;
-    left: 0;
+.sliderthumb{
     width: 56px;
     height: 56px;
     border-radius: 50%;
@@ -437,17 +414,18 @@ figure img {
     border: 0;
     z-index: 5;
     outline: none;
-    transition: left 0.6s cubic-bezier(0.5, 1, 0.89, 1);
+    /*transition: left 0.6s cubic-bezier(0.5, 1, 0.89, 1);*/
 }
 
-.slide-to-confirm.sliding .slideTriger,
-.slide-to-confirm.completed .slideTriger{
-    left: calc(100% - 56px);
+
+
+.slidebutton-wrap.sliding .sliderthumb,
+.slidebutton-wrap.completed .sliderthumb{
     background: #ffffff;
 }
 
-.slideTriger:before,
-.slideTriger:after{
+.sliderthumb:before,
+.sliderthumb:after{
     content: "";
     position: absolute;
     left: 50%;
@@ -457,13 +435,13 @@ figure img {
     transform: translate(-50%, -50%);
 }
 
-.slideTriger:before{
+.sliderthumb:before{
     width: 15px;
     height: 3px;
     background-color: #ffffff;
 }
 
-.slideTriger:after{
+.sliderthumb:after{
     width: 8px;
     height: 8px;
     border-right: 3px solid #ffffff;
@@ -474,45 +452,58 @@ figure img {
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
-.slide-to-confirm.sliding .slideTriger:before,
-.slide-to-confirm.completed .slideTriger:before{
+.slidebutton-wrap.sliding .sliderthumb:before,
+.slidebutton-wrap.completed .sliderthumb:before{
     background: #FF0867;
 }
 
-.slide-to-confirm.sliding .slideTriger:after,
-.slide-to-confirm.completed .slideTriger:after{
+.slidebutton-wrap.sliding .sliderthumb:after,
+.slidebutton-wrap.completed .sliderthumb:after{
     border-color: #FF0867;
 }
 
-.slideTriger.active{
+.sliderthumb.active{
     outline: none;
     background: #ffffff;
 }
 
-.slideTriger.active:before{
+.sliderthumb.active:before{
     background-color: #FF0867;
+}
+
+.sliderthumb.active:after{
+    border-color: #FF0867;
+}
+
+input[type=range]::-webkit-slider-thumb:active ~ .sliderthumb {
+  background-color: #ffffff;
+}
+
+input[type=range]::-moz-range-thumb:active ~ .sliderthumb {
+  background-color: #ffffff;
 }
 
 .slideTriger.active:after{
     border-color: #FF0867;
 }
 
-.slide-to-confirm .button-text {
+.slidebutton-wrap .button-text {
     position: absolute;
-    left: 50%;
+    left: 0;
     top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
     z-index: 2;
-    color: #ffffff;
+    color: #FF0867;
     font-size: 18px;
     transition: color .3s ease-in;
     width: 100%;
+    text-align: center;
 }
 
-.slide-to-confirm.sliding .button-text,
-.slide-to-confirm.completed .button-text{
+.slidebutton-wrap.sliding .button-text,
+.slidebutton-wrap.completed .button-text{
     color: #ffffff;
 }
 
@@ -559,6 +550,123 @@ figure img {
     visibility: visible;
 }
 
+.slidebutton-wrap{
+    position: relative;
+}
+
+.continue-action{
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    width: 100%;
+    z-index: 9;
+    height: 56px;
+    text-indent: -999px;
+}
+
+.slider, .slidervertical {
+  position:absolute;
+  left:0px;
+  top:0px;
+  overflow:visible;
+  z-index:100;
+}
+/* slidershell exists only
+to provide a positioning context for the range input and other elements.*/
+
+.slidershell {
+    width: 100%;
+    height: 56px;
+  border-radius: 100px;
+  vertical-align:middle;
+  display:inline-block;
+  border:0 none;
+  position:relative;
+  left:0px;
+  top:0px;
+  overflow:visible;
+  background: rgba(24, 24, 24, 0.04);
+  /*filter: url(#goo);*/
+}
+
+.completed .slidershell{
+    pointer-events: none;
+}
+
+/* .slidertrack is the visible track on which the user drags the thumb button. */
+.slidertrack {
+  border-radius: 100px;
+  position:absolute;
+  background: rgba(24, 24, 24, 0.04);
+  height: 56px;
+}
+
+/* .sliderfill adds color (or a gradient as seen here) to the track as the user 
+    drags the thumb. */
+.sliderfill {
+    position:absolute;
+    pointer-events:none;
+    background: #FF0867;
+    border-radius: 100px 10px 10px 100px;
+    height: 56px;
+}
+
+.completed .sliderfill{
+    border-radius: 100px;
+}
+
+/* .sliderthumb can be any css you like including an image. 
+    The dimensions must match those found in the rule for 
+    input[type=range]::-webkit-slider-thumb. */
+.sliderthumb {
+    width: 56px;
+    height: 56px;
+    display:block;
+    background: linear-gradient(0deg, #FF0867, #FF0867), #FF3D51;
+    border-radius:50%;
+    background-position:0px 0px;
+    position:absolute;
+    left:0px;
+    top:0px;
+    border:0 none;
+    padding:0px;margin:0px;text-align:center;
+    pointer-events:none;
+}
+
+/* .slidervalue can be styled as you see fit */
+input[type=range] {
+  width:100%;
+  height:100%;
+  appearance:none;
+  margin:0px;
+  padding:0px;
+  border:0 none;
+  background:transparent;
+  color:transparent;
+  overflow:visible;
+  opacity: 0;
+}
+
+input[type=range]:focus {
+    outline:none;
+  }
+
+/* Make the thumbs the same size as your custom sliderthumb. 
+    they will not be visible but they will be draggable.    */
+input[type=range]::-webkit-slider-thumb {width:56px;height:56px;
+    border-radius:0px;border:0 none;background:transparent;-webkit-appearance:none;}
+
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  opacity: 0;
+}
+
+input[type=range]::-moz-range-thumb {
+  -moz-appearance: none;
+  opacity: 0;
+}
+
 /* =============== Responsive style =============== */
 /* iPhone 6 pluse and upper style */
 @media only screen and (max-height: 736px) {
@@ -598,7 +706,7 @@ figure img {
         margin-top: 15px;
     }
     
-    .slide-to-confirm{
+    .slidebutton-wrap{
         margin-top: 12px;
     }
     
@@ -606,6 +714,9 @@ figure img {
         padding-bottom: 17px;
     }
 
+    .checking-text{
+        margin-top: 16px;
+    }
 
 }
 
@@ -671,24 +782,26 @@ figure img {
         max-height: 150px;
     }
     
-    
-    .slide-to-confirm{
+    .sliderfill,
+    .slidershell,
+    .slidebutton-wrap{
         height: 45px;
     }
     
+    .sliderthumb,
     .slideTriger{
         width: 45px;
         height: 45px;
     }
     
     
-    .slide-to-confirm.sliding .slideTriger,
-    .slide-to-confirm.completed .slideTriger{
+    .slidebutton-wrap.sliding .slideTriger,
+    .slidebutton-wrap.completed .slideTriger{
         left: calc(100% - 45px);
     }
     
-    .slide-to-confirm:after, 
-    .slide-to-confirm:before{
+    .slidebutton-wrap:after, 
+    .slidebutton-wrap:before{
         width: 45px;
         height: 45px;
     }
@@ -705,6 +818,18 @@ figure img {
     #svgContainer {
         max-width: 45px;
         max-height: 45px;
+    }
+    
+    .checking-text {
+        margin-top: 10px;
+    }
+    
+    .continue-action{
+        height: 45px;
+    }
+    
+    .sliderfill{
+        border-radius: 100px 45px 45px 100px;
     }
 }
 
@@ -806,26 +931,28 @@ figure img {
         margin-top: 10px;
     }
 
-    .slide-to-confirm{
+    .slidebutton-wrap{
         margin-top: 12px;
     }
     
-    
+    .sliderthumb,
     .slideTriger{
         width: 35px;
         height: 35px;
     }
     
-    .slide-to-confirm.sliding .slideTriger, 
-    .slide-to-confirm.completed .slideTriger {
+    .slidebutton-wrap.sliding .slideTriger, 
+    .slidebutton-wrap.completed .slideTriger {
         left: calc(100% - 35px);
     }
     
+    .sliderthumb:before,
     .slideTriger:before{
         width: 12px;
         height: 2px;
     }
     
+    .sliderthumb:after,
     .slideTriger:after{
         width: 6px;
         height: 6px;
@@ -834,17 +961,19 @@ figure img {
         margin-left: 3px;
     }
     
-    .slide-to-confirm{
+    .sliderfill,
+    .slidershell,
+    .slidebutton-wrap{
         height: 35px;
     }
     
-    .slide-to-confirm:after, 
-    .slide-to-confirm:before{
+    .slidebutton-wrap:after, 
+    .slidebutton-wrap:before{
         width: 35px;
         height: 35px;
     }
     
-    .slide-to-confirm .button-text{
+    .slidebutton-wrap .button-text{
         font-size: 16px;
     }
 
@@ -866,6 +995,18 @@ figure img {
     #svgContainer{
         width: auto;
         height: auto;
+    }
+    
+    .checking-text {
+        margin-top: 0;
+    }
+    
+    .continue-action{
+        height: 35px;
+    }
+    
+    .sliderfill{
+        border-radius: 100px;
     }
 
 }
