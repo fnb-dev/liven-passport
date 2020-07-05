@@ -45,7 +45,8 @@
                 </li>
             </ul>
             <div class="slidebutton-wrap">
-                <span class="button-text">Check-in</span>
+                <a href="appboy://close" class="continue-action">Close</a>
+                <span class="button-text">Slide to confirm</span>
                 <div class="slidershell" id="slidershell">
                     <input class="slider" id="slider" type="range" min="0" max="100" value="0"
     oninput="showValue(value);" onchange="showValue(value);"/>
@@ -114,12 +115,17 @@
                     $(".trigering-wrap").fadeOut(function(){
                         $(".success-message").show();
                     });
-                    $(".slidebutton-wrap").prepend('<a href="appboy://close" class="continue-action">Close</a>');
                     $('body').removeClass("checking");
                     $(".lead h4").html("<span>Easy as pie! </span> Enjoy your time at <br> Calia - Chadstone");
                     $(".liven-passport-body").addClass("complete");
                     $(".slidebutton-wrap").addClass("completed").find(".button-text").text("Continue");
                 }
+                
+                /*$(".continue-action").click(function(e){
+                    e.preventDefault();
+                    console.log("I've clicked")
+                    window.location = "appboy://close"
+                })*/
                               
                 
             }); //End Ready function
@@ -206,7 +212,7 @@
                     slider.value = 0
                     
                     jQuery('body').removeClass("checking");
-                    jQuery(".slidebutton-wrap").removeClass("sliding").find(".button-text").text("Check-in");
+                    jQuery(".slidebutton-wrap").removeClass("sliding").find(".button-text").text("Slide to confirm");
 
                     jQuery(".icon-wrap").removeClass("show");
                     lottie.stop();

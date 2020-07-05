@@ -559,9 +559,16 @@ input[type=range]::-moz-range-thumb:active ~ .sliderthumb {
     left: 0;
     bottom: 0px;
     width: 100%;
-    z-index: 9;
+    z-index: 99;
     height: 56px;
     text-indent: -999px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.completed .continue-action{
+    opacity: 1;
+    visibility: visible;
 }
 
 .slider, .slidervertical {
