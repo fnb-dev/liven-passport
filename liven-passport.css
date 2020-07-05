@@ -168,7 +168,7 @@ figure img {
     left: 0;
     width: 100%;
     text-align: center;
-    margin-top: 25px;
+    margin-top: 15px;
     opacity: 0;
     -webkit-transition: opacity .3s;
     -ms-transition: opacity .3s;
@@ -195,7 +195,7 @@ figure img {
 }
 
 .complete .lead h4{
-    margin-top: 26px;
+    margin-top: 15px;
 }
 
 .lead h4 span{
@@ -1033,8 +1033,8 @@ input[type=range]::-moz-range-thumb {
         width: 45px;
     }
 
-    .city-img{
-        margin-top: 64px;
+    .complete .city-img{
+        margin-top: 84px;
     }
 
 }
