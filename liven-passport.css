@@ -420,7 +420,7 @@ figure img {
 }
 
 .slidebutton-wrap{
-    width: calc(100% - 90px);
+    width: calc(100% - 56px);
     height: 56px;
     margin-left: 32px;
     position: relative;
@@ -535,7 +535,6 @@ input[type=range]::-moz-range-thumb:active ~ .sliderthumb {
     transition: color .3s ease-in;
     width: 100%;
     text-align: center;
-    margin-left: 11px;
 }
 
 .slidebutton-wrap.sliding .button-text,
@@ -590,7 +589,7 @@ input[type=range]::-moz-range-thumb:active ~ .sliderthumb {
     position: relative;
 }
 
-.slidebutton-wrap:after{
+/*.slidebutton-wrap:after{
     content: "";
     position: absolute;
     right: 0;
@@ -603,7 +602,7 @@ input[type=range]::-moz-range-thumb:active ~ .sliderthumb {
 
 .slidebutton-wrap.completed:after{
     background-color: #FF0867;
-}
+}*/
 
 .continue-action{
     position: absolute;
@@ -635,7 +634,7 @@ to provide a positioning context for the range input and other elements.*/
 .slidershell {
     width: 100%;
     height: 56px;
-  border-radius: 100px 0 0 100px;
+  border-radius: 100px;
   vertical-align:middle;
   display:inline-block;
   border:0 none;
@@ -665,13 +664,14 @@ to provide a positioning context for the range input and other elements.*/
     position:absolute;
     pointer-events:none;
     background: #FF0867;
-    border-radius: 100px 10px 10px 100px;
+    border-radius: 100px;
     height: 56px;
+    min-width: 56px;
 }
 
-/*.completed .sliderfill{
+.completed .sliderfill{
     border-radius: 100px;
-}*/
+}
 
 /* .sliderthumb can be any css you like including an image. 
     The dimensions must match those found in the rule for 
@@ -844,7 +844,7 @@ input[type=range]::-moz-range-thumb {
         max-height: 150px;
     }
     
-    .sliderfill,
+    /*.sliderfill,
     .slidershell,
     .slidebutton-wrap{
         height: 45px;
@@ -865,7 +865,7 @@ input[type=range]::-moz-range-thumb {
     .slidebutton-wrap:after, 
     .slidebutton-wrap:before{
         height: 45px;
-    }
+    }*/
     
     .success-message{
         margin-top: 36px;
@@ -886,13 +886,13 @@ input[type=range]::-moz-range-thumb {
         margin-top: 10px;
     }
     
-    .continue-action{
+    /*.continue-action{
         height: 45px;
-    }
+    }*/
     
-    .sliderfill{
+    /*.sliderfill{
         border-radius: 100px 45px 45px 100px;
-    }
+    }*/
 }
 
 /* iPhone 5 style */
@@ -949,12 +949,9 @@ input[type=range]::-moz-range-thumb {
         top: 195px;
     }
     
+    .complete .city-img,
     .city-img{
-        margin-top: 40px;
-    }
-    
-    .complete .city-img{
-        margin-top: 40px;
+        margin-top: 25px;
     }
     
     .trigering-item {
@@ -993,6 +990,7 @@ input[type=range]::-moz-range-thumb {
         margin-top: 10px;
     }
     
+    /*
     .slidershell{
         border-radius: 100px;
     }
@@ -1039,7 +1037,7 @@ input[type=range]::-moz-range-thumb {
         height: 35px;
         opacity: 0;
         visibility: hidden;
-    }
+    }*/
     
     .slidebutton-wrap .button-text{
         font-size: 16px;
@@ -1071,9 +1069,9 @@ input[type=range]::-moz-range-thumb {
         margin-top: 0;
     }
     
-    .continue-action{
+    /*.continue-action{
         height: 35px;
-    }
+    }*/
     
     .sliderfill{
         border-radius: 100px;
